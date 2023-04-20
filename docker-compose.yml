@@ -1,0 +1,57 @@
+version: '3.5'
+
+services:
+  my-lab:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=mydb
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+      - DB_CONNECTION_STRING=mongodb://mongodb:27017/mylab
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_REALM=myrealm
+      - KEYCLOAK_CLIENT_ID=myclient
+      - KEYCLOAK_CLIENT_SECRET=mysecret
+    depends_on:
+      - mongodb
+      - keycloak
+    restart: always
+    volumes:
+      - ./:/app
+    networks:
+      - my-lab-network
+
+  keycloak:
+    image: jboss/keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    depends_on:
+      - mongodb
+    networks:
+      - my-lab-network
+
+  mongodb:
+    image: mongo:4.4
+    environment:
+      MONGO_INITDB_DATABASE: mylab
+    ports:
+      - "27018:27017"
+    restart: always
+    volumes:
+      - db-data:/var/lib/mongo/data
+    networks:
+      - my-lab-network
+
+volumes:
+  db-data:
+  # app-data:
+
+networks:
+  my-lab-network:
