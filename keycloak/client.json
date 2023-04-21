@@ -1,0 +1,22 @@
+{
+  "clientId": "mylab",
+  "rootUrl": "http://localhost:3000",
+  "baseUrl": "/",
+  "surrogateAuthRequired": false,
+  "enabled": true,
+  "clientAuthenticatorType": "client-secret",
+  "secret": "09a71c59-0351-4ce6-bc8f-8fd3feb9d2ff",
+  "redirectUris": ["/*"],
+  "webOrigins": ["*"],
+  "notBefore": 0,
+  "bearerOnly": false,
+  "consentRequired": false,
+  "standardFlowEnabled": true,
+  "implicitFlowEnabled": false,
+  "directAccessGrantsEnabled": true,
+  "serviceAccountsEnabled": true,
+  "authorizationServicesEnabled": true,
+  "publicClient": false,
+  "frontchannelLogout": false,
+  "protocol": "openid-connect"
+}
