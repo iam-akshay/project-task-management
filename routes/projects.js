@@ -6,9 +6,9 @@ const { validateProject } = require('../helpers/projects');
 
 
 route.post(
-    "",
+    '',
     validateProject,
     createProjectController
 );
 
-module.exports = route
+module.exports = route;

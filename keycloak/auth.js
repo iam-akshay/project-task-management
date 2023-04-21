@@ -22,10 +22,10 @@ class KeycloakIAM {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
 
-        return response.data
-    }
+        return response.data;
+    };
 }
 
 module.exports = {
     KeycloakIAM
-}
+};

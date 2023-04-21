@@ -9,10 +9,10 @@ mongoose.connect(
         useUnifiedTopology: true
     }
 ).then(() => {
-    logger("Database connected successfully!")
+    logger('Database connected successfully!');
 }).catch(() => {
-    logger("Error occurred while connecting database!")
-})
+    logger('Error occurred while connecting database!');
+});
 
 
 module.exports.keycloakObject = new KeycloakIAM(

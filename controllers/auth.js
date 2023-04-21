@@ -1,4 +1,4 @@
-const { keycloakObject } = require('../config')
+const { keycloakObject } = require('../config');
 
 const loginController = async (req, res, next) => {
 
@@ -9,11 +9,11 @@ const loginController = async (req, res, next) => {
         password,
         process.env.KEYCLOAK_CLIENT_ID,
         process.env.KEYCLOAK_CLIENT_SECRET
-    )
+    );
 
     res.status(200).send(tokenData);
-}
+};
 
 module.exports = {
     loginController
-}
+};

@@ -11,12 +11,12 @@ const createProjectController = async (req, res, next) => {
         res.status(201).send({
             'message': 'Project created successfully',
             'project': project
-        })
+        });
     } catch (err) {
         next(err);
     }
-}
+};
 
 module.exports = {
     createProjectController
-}
+};

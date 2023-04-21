@@ -1,12 +1,12 @@
 const { body, validationResult } = require('express-validator');
-const { isProjectExists } = require('../services/projects')
+const { isProjectExists } = require('../services/projects');
 
 exports.validateProject = [
-    body("name")
+    body('name')
         .notEmpty()
-        .withMessage("Project name is required")
-        .matches(/^[a-zA-Z0-9\-]+$/, "i")
-        .withMessage("Project name must contain only letters and numbers")
+        .withMessage('Project name is required')
+        .matches(/^[a-zA-Z0-9\-]+$/, 'i')
+        .withMessage('Project name must contain only letters and numbers')
         .custom((name) => isProjectExists(name)),
     (req, res, next) => {
         const error = validationResult(req);
