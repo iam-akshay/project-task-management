@@ -5,14 +5,22 @@ require('dotenv').config();
 const projectsRouter = require('./routes/projects');
 const authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
+const { validateToken } = require('./controllers/auth')
+
+require('./config');
+
 const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/projects', projectsRouter);
-app.use('/auth', authRouter);
+
+app.use('/api/auth', authRouter);
+
+// middlewaer: use to authenticate a user
+app.use("/api", validateToken);
+app.use('/api/projects', projectsRouter);
 
 
 // catch 404 and forward to error handler
@@ -26,7 +34,6 @@ app.use(function (err, req, res, next) {
 });
 
 
-require('./config');
 
 app.listen(3000, () => {
     logger('App started at port 3000...');

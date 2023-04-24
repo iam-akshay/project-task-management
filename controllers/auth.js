@@ -14,6 +14,17 @@ const loginController = async (req, res, next) => {
     res.status(200).send(tokenData);
 };
 
+const validateToken = async (req, res, next) => {
+    const { authorization } = req.headers;
+
+    const error = await keycloakObject.validateToken(authorization);
+    if (error) {
+        return res.status(403).send({ error });
+    }
+    next();
+}
+
 module.exports = {
-    loginController
+    loginController,
+    validateToken
 };
