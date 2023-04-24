@@ -11,6 +11,10 @@ const projectsSchema = mongoose.Schema({
     description: {
         type: String,
         maxlength: 300
+    },
+    settings:{
+        type: Object,
+        default: {'is_active': true}
     }
 });
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const { KeycloakIAM } = require('./keycloak/auth');
+const { database, up, down } = require('migrate-mongo')
 
 mongoose.connect(
     process.env.DB_CONNECTION_STRING,
@@ -10,10 +11,18 @@ mongoose.connect(
     }
 ).then(() => {
     logger('Database connected successfully!');
-}).catch(() => {
-    logger('Error occurred while connecting database!');
+}).then(() => migrate()).catch((err) => {
+    logger('Error occurred while connecting database!', err);
 });
 
+
+/**
+ * to migrate the changes based on the migration file
+ */
+const migrate = async () => {
+    const { db, client } = await database.connect();
+    await up(db, client);
+}
 
 module.exports.keycloakObject = new KeycloakIAM(
     process.env.KEYCLOAK_AUTH_SERVER_URL,
