@@ -13,7 +13,29 @@ const createProjectService = async (data) => {
     return project;
 };
 
+const getProjectsService = async ({ filters = {}, fields = {} }) => {
+    const projects = await ProjectsModel.find(filters, fields);
+    return projects;
+}
+
+const deleteProjectsService = async (projectId) => {
+    const project = await ProjectsModel.findByIdAndDelete(projectId);
+    return project;
+}
+
+const updateProjectsService = async (projectId, data) => {
+    const project = await ProjectsModel.findByIdAndUpdate(
+        projectId,
+        data,
+        { 'new': true }
+    );
+    return project;
+}
+
 module.exports = {
     isProjectExists,
-    createProjectService
+    createProjectService,
+    getProjectsService,
+    deleteProjectsService,
+    updateProjectsService
 };

@@ -15,8 +15,16 @@ const projectsSchema = mongoose.Schema({
     settings: {
         type: Object,
         default: { 'is_active': true }
+    },
+    createdBy: {
+        type: String,
+        required: true
+    },
+    config: {
+        type: String,
+        required: true
     }
-});
+}, { timestamps: true });
 
 const ProjectsModel = mongoose.model('projects', projectsSchema);
 
