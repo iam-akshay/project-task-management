@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const TasksModel = require('./tasks');
 
 const projectsSchema = mongoose.Schema({
     name: {
@@ -25,6 +26,12 @@ const projectsSchema = mongoose.Schema({
         required: true
     }
 }, { timestamps: true });
+
+projectsSchema.pre('deleteOne', async function (next) {
+    const projectId = this._conditions._id;
+    await TasksModel.deleteOne({ projectId: projectId });
+    next()
+});
 
 const ProjectsModel = mongoose.model('projects', projectsSchema);
 

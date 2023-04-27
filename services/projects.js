@@ -19,7 +19,7 @@ const getProjectsService = async ({ filters = {}, fields = {} }) => {
 }
 
 const deleteProjectsService = async (projectId) => {
-    const project = await ProjectsModel.findByIdAndDelete(projectId);
+    const project = await ProjectsModel.deleteOne({ _id: projectId });
     return project;
 }
 

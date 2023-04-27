@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 require('dotenv').config();
 const projectsRouter = require('./routes/projects');
+const tasksRouter = require('./routes/tasks');
 const authRouter = require('./routes/auth');
 const bodyParser = require('body-parser');
 const { validateToken } = require('./controllers/auth')
@@ -20,6 +21,7 @@ app.use('/api/auth', authRouter);
 
 // middlewaer: use to authenticate a user
 app.use("/api", validateToken);
+app.use('/api/projects', tasksRouter);
 app.use('/api/projects', projectsRouter);
 
 
